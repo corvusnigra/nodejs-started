@@ -1,6 +1,7 @@
 var http = require('http');
 
 http.createServer(function (req, res) {
+    console.log(`Incoming url ${req.url}`);
 
     res.end('Hello world!')
 
