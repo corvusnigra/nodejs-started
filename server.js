@@ -1,11 +1,10 @@
 var http = require('http');
-var staticContent = require('./static.js').serveStaticContent;
-var canHandleRequest = require('./static').canHandleRequest;
+var static = require('./static.js');
 
 http.createServer(function (req, res) {
     
-    if(canHandleRequest(req)){
-        staticContent(req, res);
+    if(static.canHandleRequest(req)){
+    static.serveStaticContent(req, res);
         
         return
     }
