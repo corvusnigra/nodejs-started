@@ -1,20 +1,12 @@
 var http = require('http');
-var fs = require('fs');
+var staticContent = require('./static.js').serveStaticContent;
+var canHandleRequest = require('./static').canHandleRequest;
 
 http.createServer(function (req, res) {
     
-    if(req.url.startsWith('/static/')){
-        fs.readFile(req.url.substr(1), (err, data)=>{
-            if(err){
-                console.log(`Error file not found ${err}`);
-                res.statusCode = 404;
-                res.end();
-                return
-            }
-
-                res.end(data);
-
-        })
+    if(canHandleRequest(req)){
+        staticContent(req, res);
+        
         return
     }
     res.end('Hello World');
